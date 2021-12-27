@@ -118,3 +118,6 @@ dist
 
 # JetBrains files
 .idea/
+
+# Truffle ABIs files
+truffle_abis/
