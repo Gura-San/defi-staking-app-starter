@@ -23,10 +23,19 @@ contract("DecentralBank", (accounts) => {
   });
 
   describe("Mock RWD Deployment", async () => {
+    let rwd = null;
+    beforeEach(async () => {
+      rwd = await RWD.new();
+    });
+
     it("matches name successfully", async () => {
-      let rwd = await RWD.new();
       const name = await rwd.name();
       assert.equal(name, "Reward Token", "name does not match");
+    });
+
+    it("matches symbol successfully", async () => {
+      const symbol = await rwd.symbol();
+      assert.equal(symbol, "RWD", "symbol does not match");
     });
   });
 });
