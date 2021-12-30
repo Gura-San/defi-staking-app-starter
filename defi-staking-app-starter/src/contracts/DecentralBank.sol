@@ -2,8 +2,8 @@
 
 pragma solidity ^0.5.0;
 
-import "./RWD";
-import "./Tether";
+import "./RWD.sol";
+import "./Tether.sol";
 
 contract DecentralBank {
     string public name = "Decentral Bank";
@@ -11,7 +11,7 @@ contract DecentralBank {
     Tether public tether;
     RWD public rwd;
 
-    constructor(RWD _rwd, Tether _tether) {
+    constructor(RWD _rwd, Tether _tether) public {
         rwd = _rwd;
         tether = _tether;
     }
