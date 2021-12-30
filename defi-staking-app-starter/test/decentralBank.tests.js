@@ -12,4 +12,12 @@ contract("DecentralBank", (accounts) => {
       assert.equal(name, "Tether", "name does not match");
     });
   });
+
+  describe("Mock RWD Deployment", async () => {
+    it("matches name successfully", async () => {
+      let rwd = await RWD.new();
+      const name = await rwd.name();
+      assert.equal(name, "Reward Token", "name does not match");
+    });
+  });
 });
