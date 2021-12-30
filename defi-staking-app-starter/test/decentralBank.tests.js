@@ -4,13 +4,24 @@ const DecentralBank = artifacts.require("DecentralBank");
 
 require("chai").use(require("chai-as-promised")).should();
 
-contract("DecentralBank", (accounts) => {
+contract("DecentralBank", ([owner, customer]) => {
   let tether,
-    rwd = null;
+    rwd,
+    decentralBank = null;
+
+  let tokens = (number) => web3.utils.toWei(number.toString(), "ether");
 
   before(async () => {
+    // Load Contracts
     tether = await Tether.new();
     rwd = await RWD.new();
+    decentralBank = await DecentralBank.new(rwd.address, tether.address);
+
+    // Transfer all tokens to DecentralBank (1 mil)
+    await rwd.transfer(decentralBank.address, tokens(1000000));
+
+    // Transfer 100 mock Tethers to Investor
+    await tether.transfer(customer, tokens(100), { from: owner });
   });
 
   describe("Mock Tether Deployment", async () => {
