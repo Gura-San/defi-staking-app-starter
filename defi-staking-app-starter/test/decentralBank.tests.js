@@ -5,12 +5,15 @@ const DecentralBank = artifacts.require("DecentralBank");
 require("chai").use(require("chai-as-promised")).should();
 
 contract("DecentralBank", (accounts) => {
-  describe("Mock Tether Deployment", async () => {
-    let tether = null;
-    beforeEach(async () => {
-      tether = await Tether.new();
-    });
+  let tether,
+    rwd = null;
 
+  before(async () => {
+    tether = await Tether.new();
+    rwd = await RWD.new();
+  });
+
+  describe("Mock Tether Deployment", async () => {
     it("matches name successfully", async () => {
       const name = await tether.name();
       assert.equal(name, "Tether", "name does not match");
@@ -23,11 +26,6 @@ contract("DecentralBank", (accounts) => {
   });
 
   describe("Mock RWD Deployment", async () => {
-    let rwd = null;
-    beforeEach(async () => {
-      rwd = await RWD.new();
-    });
-
     it("matches name successfully", async () => {
       const name = await rwd.name();
       assert.equal(name, "Reward Token", "name does not match");
