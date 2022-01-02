@@ -43,6 +43,23 @@ contract DecentralBank {
         hasStaked[msg.sender] = true;
     }
 
+    // Unstake tokens
+    function unstakeTokens() public {
+        uint balance = stakingBalance[msg.sender];
+        // Require the amount to be greater than 0
+        require(balance > 0, "staking balance cannot be less than 0");
+
+        // Transfer the tokes to the specified contract address from our bank
+        tether.transfer(msg.sender, balance);
+
+        // Reset staking balance
+        stakingBalance[msg.sender] = 0;
+
+        // Update staking status
+        isStaking[msg.sender] = false;
+    }
+
+
     // Issue rewards
     function issueRewards() public {
         // Require the ownwer to ussue the tokens only
