@@ -87,7 +87,7 @@ contract("DecentralBank", ([owner, customer]) => {
         );
 
         // Check Updated Ballance of Decentral Bank
-        decentralBankBallance = await tether.balanceOf(decentralBank.address)
+        decentralBankBallance = await tether.balanceOf(decentralBank.address);
         assert.equal(
           decentralBankBallance,
           tokens(100),
@@ -101,6 +101,12 @@ contract("DecentralBank", ([owner, customer]) => {
           "true",
           "Customer is staking status after staking"
         );
+
+        // Issue Tokens
+        await decentralBank.issueRewards({ from: owner });
+
+        // Ensure only the owner can issue tokes
+        await decentralBank.issueRewards({from: customer}).should.be.rejected;
       });
     });
   });
