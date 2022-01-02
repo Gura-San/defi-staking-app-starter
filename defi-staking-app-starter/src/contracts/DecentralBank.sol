@@ -20,6 +20,7 @@ contract DecentralBank {
     constructor(RWD _rwd, Tether _tether) public {
         rwd = _rwd;
         tether = _tether;
+        owner = msg.sender;
     }
 
     // Staking function
@@ -47,6 +48,7 @@ contract DecentralBank {
         // Require the ownwer to ussue the tokens only
         require(msg.sender == owner, "caller must be owner");
 
+        // Issue reward to all stakers
         for (uint i = 0; i < stakers.length; i++) {
             address recipient = stakers[i];
             // Devide by 9 to create percentage incentive for stakers
