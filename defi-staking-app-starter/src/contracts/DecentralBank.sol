@@ -33,8 +33,8 @@ contract DecentralBank {
         // Update Staking Balance
         stakingBalance[msg.sender] += _amount;
 
-        if(!hasStaked) {
-            stakers.push[msg.sender];
+        if(!hasStaked[msg.sender]) {
+            stakers.push(msg.sender);
         }
 
         // Update Staking Balance
