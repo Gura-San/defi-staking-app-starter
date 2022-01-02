@@ -58,5 +58,15 @@ contract("DecentralBank", ([owner, customer]) => {
       let balance = await rwd.balanceOf(decentralBank.address);
       assert.equal(balance, tokens(1000000), "Insuficient ballance");
     });
+
+    describe("Yield Farming", async () => {
+      it("rewards tokens for staking", async () => {
+        let customerBallance;
+
+        // Check investor ballance
+        customerBallance = await tether.balanceOf(customer);
+        assert.equal(customerBallance, tokens(100), "Customer mock wallet ballance before staking")
+      });
+    });
   });
 });
