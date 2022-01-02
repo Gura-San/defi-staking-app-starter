@@ -87,14 +87,14 @@ contract("DecentralBank", ([owner, customer]) => {
         );
 
         // Check Updated Ballance of Decentral Bank
-        decentralBankBallance = await decentralBank.stakingBalance(customer);
+        decentralBankBallance = await tether.balanceOf(decentralBank.address)
         assert.equal(
           decentralBankBallance,
           tokens(100),
           "Decentral Bank mock wallet ballance after staking from customer"
         );
 
-        // Is Staking Balance
+        // Is Staking Update
         result = await decentralBank.isStaking(customer);
         assert.equal(
           result.toString(),
